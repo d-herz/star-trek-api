@@ -2,8 +2,13 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const PORT = 8000
+const MongoClient = require('mongodb').MongoClient
+const connectionString = 'mongodb+srv://dbUser1:dbUser1@cluster0.fxkzm.mongodb.net/?retryWrites=true&w=majority'
 
 app.use(cors())
+app.use(express.json())
+
+//mongoDB connection string: mongodb+srv://dbUser1:<password>@cluster0.fxkzm.mongodb.net/?retryWrites=true&w=majority
 
 const aliens = {
   'humans':{
@@ -68,7 +73,6 @@ const aliens = {
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
-
 })
 
 app.get('/api/:alienName', (req, res)=>{
